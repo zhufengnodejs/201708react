@@ -8,7 +8,9 @@ let imgSrc = 'https://www.baidu.com/img/wanshengdoodle_677234cad70a5974a64e4665c
 //如果给行内样式的话字符串的话直接给。
 //The `style` prop expects a mapping from style properties to values, not a string
 //style属性期待一个样式对象的映射，而非字符串
+let msg = '<script>while(true){}</script>';
 let ele = <div>
+  {msg}
   <button tabIndex="1">1</button>
   <button tabIndex="2">2</button>
   <button tabIndex="3">3</button>
@@ -18,7 +20,7 @@ let ele = <div>
     className="myimg"/>
 </div>;
 console.log(ele);
-//ele不是大名鼎鼎的虚拟DOM
+//ele就是大名鼎鼎的虚拟DOM
 //其实是一个普通的JS对象，但是可以用来描述真实DOM长什么样子
 // type props (children)
 ReactDOM.render(
