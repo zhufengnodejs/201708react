@@ -1,0 +1,14 @@
+.Comment{
+ display:flex;
+ flex-direction: row;
+ border:1px solid lightblue;
+}
+.UserInfo{
+    display:flex;
+    flex-direction: column;
+}
+.Comment-info{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
