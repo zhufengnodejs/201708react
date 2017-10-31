@@ -1,19 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'
+function Avatar(props){
+  return (
+    <img className="Avatar"
+         style={{height:'32px'}}
+         src={props.user.avatarUrl}
+         alt={props.user.name}
+    />
+  )
+}
+function UserInfo(props){
+  return (
+    <div className="UserInfo">
+      <Avatar user={props.author}/>
+      <div className="UserInfo-name">
+        {props.author.name}
+      </div>
+    </div>
+  )
+}
+/**
+ * props.author= {name:'zfpx'}
+ * ... name="zfpx"
+ * props {name:'zfpx'}
+ */
 function Comment(props) {
   return (
     <div className="Comment">
-      <div className="UserInfo">
-        <img className="Avatar"
-             style={{height:'32px'}}
-             src={props.author.avatarUrl}
-             alt={props.author.name}
-        />
-        <div className="UserInfo-name">
-          {props.author.name}
-        </div>
-      </div>
+      <UserInfo author={props.author}/>
       <div className="Comment-info">
         <div className="Comment-text">
           {props.text}
