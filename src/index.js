@@ -19,11 +19,14 @@ function Comment(props) {
           {props.text}
         </div>
         <div className="Comment-date">
-          {props.date.toLocaleString()}
+          {formatDate(props.date)}
         </div>
       </div>
     </div>
   );
+}
+function formatDate(date){
+  return date.toLocaleString();
 }
 let props = {
   author:{
