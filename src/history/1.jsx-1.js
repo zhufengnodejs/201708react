@@ -23,7 +23,9 @@ function greeting(user){
   }
 }
 let element = <h1>{greeting()}</h1>;
-
+/*let element = React.createElement('h1',null,'你好，陌生人!');*/
+//{type:'h1',props:{children:'你好，陌生人!'}} 虚拟DOM
+//就是把虚拟DOM转变成真实的DOM并插入到DOM根节点里
 ReactDOM.render(
   element,
   document.querySelector('#root')
