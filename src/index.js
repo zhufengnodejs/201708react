@@ -1,65 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//local state and lifecycle hooks.
-//本地的状态和生命周期的钩子函数
-class Clock extends React.Component{
-  constructor(props){
-    super(props);// this.props
-    //在构造函数内部初始化state对象
-    this.state = {date:new Date};
+/**
+ * 1.在构造函数里初始化状态对象 {number:0}
+ * 2.给button绑定点击事件，当点击按钮的时候要调用setState方法修改state
+ */
+class Counter extends React.Component{
+  constructor(){
+    super();
+    this.state = {number:0};
   }
-  //组件将要挂载
-  componentWillMount(){
-      console.log('1. componentWillMount 组件将要挂载');
+  handleClick = ()=>{
+    // batch multiple setState() calls into a single update
+    //因为 setState方法的执行是异步的。所以不能依赖上一个state计算下一个state
+    /*this.setState({number:this.state.number+1});
+    this.setState({number:this.state.number+1});*/
+    //如果setState里面放入一个函数的话，会把它们放入一个队列中串行执行。
+   /* this.setState((preState,preProps)=>({
+      number:preState.number+1
+    }));
+    this.setState((preState,preProps)=>({
+      number:preState.number+1
+    }));*/
+   // 0 0 1
+    console.log(this.state.number);//0
+   this.setState({number:this.state.number+1},()=>{
+     console.log(this.state.number);//1
+   });
+    console.log(this.state.number);//0
   }
-  /*
-   * 表示向当前的组件实体上添加一个属性
-   * 这样定义的函数，无论在何时何地执行，里面的this永远当前组件的实例
-   */
-  tick = ()=>{
-    //此方法可以用来修改状态对象.是从父类继承过来的。
-    //永远永远只能用setState方法来修改状态，因为一旦调用了setState方法，不但可以修改状态对象，还会自动重新调用render方法修改界面的显示效果
-    this.setState({
-      date:new Date()
-    });
-    /*function setState(state){
-      //this.state = state;
-      //1.调用setState的时候不需要传入完整对象
-      //2.通过setState只能增加字段，或者覆盖同名字段,但不能删除字段
-      this.state = Object.assign({},this.state,state);
-      this.render();
-      //然后React还要更新DOM
-    }*/
+  //onClick里面放的是函数的定义,一定不能执行
 
-  }
-  //组件挂载完成后
-  componentDidMount(){
-    console.log('3. componentDidMount 组件将要挂载');
-    //在组件挂载完成后，开启了一个定时器，每隔一秒执行一下tick方法，另外会把返回的定时器对象传给timerID,在timerID保存到了当前实例
-    this.timerID = setInterval(this.tick,1000);
-  }
-  componentWillUnmount(){
-    console.log('4. componentWillUnmount 组件将要卸载');
-    clearInterval(this.timerID);
-  }
-
-  /**
-   * 如果一个值或属性是不需要在render的时候使用的，就不能放在state里。可以放在实例上
-   */
   render(){
-    console.log('2. render 挂载 ');
     return (
       <div>
-        <h1>Hello World</h1>
-        <h2>It's {this.state.date.toLocaleString()}</h2>
+        <p>{this.state.number}</p>
+        <button onClick={this.handleClick}>+</button>
       </div>
     )
   }
+  /**
+   * Cannot update during an existing state transition
+   * 在状态改变中不能再更新
+   * Maximum update depth exceeded
+   * 最大更新深度超出异常
+   */
 }
-ReactDOM.render(<Clock/>,document.querySelector('#root'));
-/**
- * 组件=组件的实例=通过组件类的构造函数生成的
- * this.state其实是组件实例上的一个私有属性，非常普通
- * 如果组件被销毁了，实例被销毁。
- *
- **/
+ReactDOM.render(<Counter/>,document.querySelector('#root'));
