@@ -1,34 +1,18 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-function Blog(props){
- let sidebar =  (
-   <ul>
-     {
-       props.posts.map((item,index)=>(
-         <li key={item.id}>{item.title}</li>
-       ))
-     }
-   </ul>
- )
- let contents = (
-   <ul>
-     {
-       props.posts.map((item,index)=>(
-         <li key={item.id}>{item.content}</li>
-       ))
-     }
-   </ul>
- )
- return (
-   <div>
-     {sidebar}
-     <hr/>
-     {contents}
-   </div>
- )
+class RegForm extends Component{
+  render(){
+    return (
+      <form>
+        <label>用户名
+          <input type="text" />
+        </label>
+        <label>密码
+          <input type="text"/>
+        </label>
+        <input type="submit"/>
+      </form>
+    )
+  }
 }
-let posts = [
-  {id:1,title:'标题1',content:'内容1'},
-  {id:2,title:'标题2',content:'内容2'}
-]
-ReactDOM.render(<Blog posts={posts}/>,document.querySelector('#root'));
+ReactDOM.render(<RegForm/>,document.querySelector('#root'));
