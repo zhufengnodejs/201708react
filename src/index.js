@@ -28,6 +28,7 @@ class Clock extends React.Component{
       //2.通过setState只能增加字段，或者覆盖同名字段,但不能删除字段
       this.state = Object.assign({},this.state,state);
       this.render();
+      //然后React还要更新DOM
     }*/
 
   }
@@ -56,3 +57,9 @@ class Clock extends React.Component{
   }
 }
 ReactDOM.render(<Clock/>,document.querySelector('#root'));
+/**
+ * 组件=组件的实例=通过组件类的构造函数生成的
+ * this.state其实是组件实例上的一个私有属性，非常普通
+ * 如果组件被销毁了，实例被销毁。
+ *
+ **/
