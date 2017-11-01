@@ -25,6 +25,8 @@ class LoginCtrl extends Component{
   }
   render(){
     let {isLogin} = this.state;
+    //如果已经登录的话显示退出按钮
+    //如果未登录的话显示登录按钮
     let button = isLogin?<LogoutButton onClick={()=>this.setState({isLogin:false})}/>
       :<LoginButton  onClick={()=>this.setState({isLogin:true})}/>;
     return (
