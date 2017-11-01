@@ -11,13 +11,18 @@ class Page extends Component{
     super();
     this.state = {showWarning:false};
   }
+  handleClick = ()=>{
+    this.setState((preState)=>({showWarning:!preState.showWarning}));
+  }
   render(){
     return (
       <div>
         <WarningBanner warn={this.state.showWarning} message="Warning"/>
-        <button></button>
+        <button onClick={this.handleClick}>
+          {this.state.showWarning?'隐藏':"显示"}
+        </button>
       </div>
     )
   }
 }
-ReactDOM.render(,document.querySelector('#root'));
+ReactDOM.render(<Page/>,document.querySelector('#root'));
