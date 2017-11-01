@@ -1,48 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/**
- * 1.在构造函数里初始化状态对象 {number:0}
- * 2.给button绑定点击事件，当点击按钮的时候要调用setState方法修改state
- */
-class Counter extends React.Component{
-  constructor(){
-    super();
-    this.state = {number:0};
+class ActionLink extends React.Component{
+  //参数是事件对象
+  handleClick = (event)=>{
+    //调用此方法可以阻止默认事件
+    event.preventDefault();
+    console.log('click me');
   }
-  handleClick = ()=>{
-    // batch multiple setState() calls into a single update
-    //因为 setState方法的执行是异步的。所以不能依赖上一个state计算下一个state
-    /*this.setState({number:this.state.number+1});
-    this.setState({number:this.state.number+1});*/
-    //如果setState里面放入一个函数的话，会把它们放入一个队列中串行执行。
-   /* this.setState((preState,preProps)=>({
-      number:preState.number+1
-    }));
-    this.setState((preState,preProps)=>({
-      number:preState.number+1
-    }));*/
-   // 0 0 1
-    console.log(this.state.number);//0
-   this.setState({number:this.state.number+1},()=>{
-     console.log(this.state.number);//1
-   });
-    console.log(this.state.number);//0
-  }
-  //onClick里面放的是函数的定义,一定不能执行
-
   render(){
     return (
       <div>
-        <p>{this.state.number}</p>
-        <button onClick={this.handleClick}>+</button>
+        <a href="http://www.baidu.com" onClick={this.handleClick}>
+          click me
+        </a>
       </div>
     )
   }
-  /**
-   * Cannot update during an existing state transition
-   * 在状态改变中不能再更新
-   * Maximum update depth exceeded
-   * 最大更新深度超出异常
-   */
 }
-ReactDOM.render(<Counter/>,document.querySelector('#root'));
+class Toggle extends React.Component{
+  constructor(){
+    super();
+    this.state = {on:true};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  /**
+   * 解决this问题的三种方法
+   * 1. 箭头函数
+   * 2. bind this
+   * 3. 直接在构造函数中绑定this
+   */
+  handleClick(){
+    //Cannot read property 'setState' of undefined
+    //在类组件里，除了生命周期函数和构造函数之外，其它函数里的this指都向undefined
+    this.setState({on:!this.state.on});
+  }
+  render(){
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.on?'开':'关'}
+      </button>
+    )
+  }
+}
+ReactDOM.render(<Toggle/>,document.querySelector('#root'));
