@@ -14,17 +14,23 @@ class RegForm extends Component{
     let password = event.target.value;//取得输入框的值
     this.setState({password});
   }
+  handleSubmit = (event)=>{
+    event.preventDefault();
+    console.log(this.state);
+  }
   render(){
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>用户名
           <input
+            required
                  type="text"
                  onChange={this.handleUserName}
                  value={this.state.username} />
         </label>
         <label>密码
           <input type="text"
+                 required
                  onChange={this.handlePassword}
                  value={this.state.password}/>
         </label>
