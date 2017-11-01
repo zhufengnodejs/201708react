@@ -20,7 +20,7 @@ class ActionLink extends React.Component{
 class Toggle extends React.Component{
   constructor(){
     super();
-    this.state = {on:true};
+    this.state = {on:true,num:0};
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -30,15 +30,16 @@ class Toggle extends React.Component{
    * 2. bind this
    * 3. 直接在构造函数中绑定this
    */
-  handleClick(){
+  handleClick(num,event){
     //Cannot read property 'setState' of undefined
     //在类组件里，除了生命周期函数和构造函数之外，其它函数里的this指都向undefined
-    this.setState({on:!this.state.on});
+    this.setState({on:!this.state.on,num});
   }
   render(){
     return (
-      <button onClick={this.handleClick}>
-        {this.state.on?'开':'关'}
+
+        <button onClick={this.handleClick.bind(this,5)}>
+        {this.state.on?'开'+this.state.num:'关'+this.state.num}
       </button>
     )
   }
