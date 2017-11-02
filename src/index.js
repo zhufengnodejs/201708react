@@ -52,14 +52,16 @@ class Calculator extends Component {
       this.setState({temperature:event.target.value,scale:event.target.name});
   }
   render() {
+    let cTemperature = this.state.scale=='摄氏'?this.state.temperature:tryConvert(this.state.temperature,toCelsius);
+    let fTemperature = this.state.scale == '摄氏'?tryConvert(this.state.temperature,toFahrenheit):this.state.temperature;
     return (
       <div>
         <TemperatureInput
           onTemperatureChange={this.handleTemperatureChange}
-          temperature={this.state.temperature} scale="摄氏"/>
+          temperature={cTemperature} scale="摄氏"/>
         <TemperatureInput
           onTemperatureChange={this.handleTemperatureChange}
-          temperature={this.state.temperature} scale="华氏"/>
+          temperature={fTemperature} scale="华氏"/>
         <BoilingVerdict/>
       </div>
     )
