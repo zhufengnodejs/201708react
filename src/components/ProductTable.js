@@ -4,7 +4,12 @@ export default class ProductTable extends Component{
     let rows = [];
     for(let i=0;i<this.props.products.length;i++){
       let product = this.props.products[i];
-      rows.push(<tr key={i}><td>{product.name}</td>
+      if(this.props.filterText&&product.name.indexOf(this.props.filterText)==-1)
+        continue;
+      if(this.props.inStockOnly && !product.stocked)
+        continue;
+
+      rows.push(<tr key={i}><td style={{color:product.stocked?'black':'red'}}>{product.name}</td>
         <td>{product.price}</td></tr>);
     }
     return (
