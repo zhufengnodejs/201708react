@@ -4,17 +4,15 @@ import ReactDOM from 'react-dom';
 class RegForm extends Component{
   constructor(){
     super();
-    this.state = {username:'',password:''};
+    this.state = {username:'',password:'',desc:''};
   }
-  handleUserName = (event)=>{
-    let username = event.target.value;//取得输入框的值
-    this.setState({username});
+  //event.target.dataset是自定义属性对象
+  handleChange = (event)=>{
+    let field = event.target.dataset.field;
+    let val = event.target.value;//取得输入框的值
+    this.setState({[field]:val});
   }
-  handlePassword = (event)=>{
-    let password = event.target.value;//取得输入框的值
-    this.setState({password});
-  }
-  handleSubmit = (event)=>{
+  handleSubmit=(event)=>{
     event.preventDefault();
     console.log(this.state);
   }
@@ -24,15 +22,21 @@ class RegForm extends Component{
         <label>用户名
           <input
             required
+                 data-field="username"
                  type="text"
-                 onChange={this.handleUserName}
+                 onChange={this.handleChange}
                  value={this.state.username} />
         </label>
         <label>密码
           <input type="text"
+                 data-field="password"
                  required
-                 onChange={this.handlePassword}
+                 onChange={this.handleChange}
                  value={this.state.password}/>
+        </label>
+        <label>
+          简介
+          <textarea data-field="desc" cols="30" rows="10" value={this.state.desc} onChange={this.handleChange}></textarea>
         </label>
         <input type="submit"/>
       </form>
