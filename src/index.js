@@ -8,7 +8,8 @@ function BoilingVerdict(props) {
     return <p>水没开!</p>;
   }
 }
-class Calculator extends Component {
+//输入温度的组件
+class TemperatureInput extends Component{
   constructor(){
     super();
     this.state = {temperature:0}
@@ -16,7 +17,7 @@ class Calculator extends Component {
   handleChange = (event)=>{
     this.setState({temperature:event.target.value});
   }
-  render() {
+  render(){
     return (
       <fieldset>
         <label>请输入温度
@@ -26,6 +27,16 @@ class Calculator extends Component {
           />
         </label>
       </fieldset>
+    )
+  }
+}
+class Calculator extends Component {
+  render() {
+    return (
+      <div>
+        <TemperatureInput/>
+        <TemperatureInput/>
+      </div>
     )
   }
 }
