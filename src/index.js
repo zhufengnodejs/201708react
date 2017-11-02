@@ -4,4 +4,4 @@ import FilterableProductTable from "./components/FilterableProductTable";
 
 let products = require('./products');
 
-ReactDOM.render(<FilterableProductTable/>, document.querySelector('#root'));
+ReactDOM.render(<FilterableProductTable products={products}/>, document.querySelector('#root'));

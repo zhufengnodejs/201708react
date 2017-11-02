@@ -29,6 +29,7 @@ export default class FilterableProductTable extends Component {
           inStockOnly={this.state.inStockOnly}
         />
         <ProductTable
+          products={this.props.products}
           filterText={this.state.filterText}
           inStockOnly={this.state.inStockOnly}
         />
