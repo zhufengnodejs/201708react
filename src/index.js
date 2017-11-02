@@ -28,16 +28,14 @@ function BoilingVerdict(props) {
 }
 //输入温度的组件
 class TemperatureInput extends Component{
-  handleChange = (event)=>{
-   this.props.onTemperatureChange(event.target.value);
-  }
   render(){
     return (
       <fieldset>
         <label>请输入<span style={{color:"red"}}>{this.props.scale}</span>温度
           <input type="text"
+                 name={this.props.scale}
                  value={this.props.temperature}
-                 onChange={this.handleChange}
+                 onChange={event=>this.props.onTemperatureChange(event)}
           />
         </label>
       </fieldset>
@@ -47,10 +45,11 @@ class TemperatureInput extends Component{
 class Calculator extends Component {
   constructor(){
     super();
-    this.state = {temperature:0}
+    this.state = {temperature:0,scale:'摄氏'}
   }
-  handleTemperatureChange = (temperature)=>{
-      this.setState({temperature});
+  //第一个参数是温度 第二个参数是单位
+  handleTemperatureChange = (event)=>{
+      this.setState({temperature:event.target.value,scale:event.target.name});
   }
   render() {
     return (
