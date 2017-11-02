@@ -12,7 +12,7 @@ export default class ProductTable extends Component{
       if(this.props.inStockOnly && !product.stocked)
         continue;
       if(!lastCategory || product.category!=lastCategory){
-        rows.push(<tr><td colSpan={2} style={{fontWeight:'bold'}}>{product.category}</td></tr>);
+        rows.push(<tr key={'c'+i}><td colSpan={2} style={{fontWeight:'bold'}}>{product.category}</td></tr>);
         //把当前的分类当成上一个分类
         lastCategory = product.category;
       }
