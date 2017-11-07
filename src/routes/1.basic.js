@@ -10,7 +10,9 @@ function About(){
 //Router是路由容器，就是他负责处理在内部定义的所有路由
 ReactDOM.render(
   <Router>
-    <Route path="/" component={Home}/>
-    <Route path="/about" component={About}/>
-  </Router>
+    <div>
+      <Route path="/" component={Home}/>
+      <Route path="/about" component={About}/>
+    </div>
+  </Router>,document.querySelector('#root')
 );
