@@ -28,7 +28,7 @@ export default class Todos extends Component {
         <ul>
           {
             this.state.todos.map((item, index) => (
-              <li>{item}</li>
+              <li key={index}>{item}</li>
             ))
           }
         </ul>
