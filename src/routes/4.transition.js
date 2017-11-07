@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {CSSTransition} from 'react-transition-group';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import './4.transition.css'
 /**
  * 在一个组件进入或离开的时候添加一系列的类名
@@ -27,18 +27,21 @@ export default class Todos extends Component {
           onKeyDown={this.addTodo}
           type="text"/><br/>
 
-        <CSSTransition
-          classNames="fade"
-          timeout={1000}
-        >
+        <TransitionGroup>
           <ul>
             {
               this.state.todos.map((item, index) => (
+                <CSSTransition
+                  timeout={1000}
+                  classNames="fade"
+                  key={index}
+                >
                 <li key={index}>{item}</li>
+                </CSSTransition>
               ))
             }
           </ul>
-        </CSSTransition>
+        </TransitionGroup>
       </div>
     )
   }
