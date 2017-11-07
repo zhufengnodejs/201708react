@@ -4,7 +4,8 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Redirect
+  Redirect,
+  withRouter
 } from 'react-router-dom';
 function Public() {
   return <div>公开页面</div>
@@ -14,7 +15,10 @@ class Login extends Component {
     //模拟登录操作
     fakeAuth.login();
     //跳转到登录前的路径
-    this.props.history.push(this.props.location.state.from.pathname);
+    if(this.props.location.state)
+      this.props.history.push(this.props.location.state.from.pathname);
+    else
+      this.props.history.push('/');
   }
   render() {
     let {from} = this.props.location.state||{from:'/'};
@@ -62,17 +66,24 @@ let fakeAuth = {
 }
 
 //如果说已经登录，则显示欢迎和退出按钮，否则显示你尚未登录
-function AuthButton() {
+// 只有路由直接渲染的组件才有history location match这三个属性
+//而这些的组件的子组件且没有这些属性
+//withRouter 是向指定的组件传入三个属性的
+let AuthButton = withRouter(function(props) {
   return (
     <div>
       {
         fakeAuth.isAuth ? <p>欢迎
-          <button>退出</button>
+          <button onClick={()=>{
+            fakeAuth.signOut();
+            props.history.push('/');
+          }
+          }>退出</button>
         </p> : <p>你尚未登录!</p>
       }
     </div>
   );
-}
+})
 //判断此用户是否登录，如果登录的话，则正常显示受保护的组件，如果未登录的话则跳转到登录页面
 //路由的渲染方式有三种
 // 1. component
