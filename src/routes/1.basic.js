@@ -46,6 +46,7 @@ function Detail(props){
   let {id,name,age} = props.location.state?props.location.state.user:{};
   return (
     <div>
+      <button onClick={props.history.goBack}>返回</button>
       ID:{id}<br/>
       name:{name}<br/>
       age:{age}
