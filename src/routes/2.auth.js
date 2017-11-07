@@ -10,8 +10,20 @@ function Public() {
   return <div>公开页面</div>
 }
 class Login extends Component {
+  login = ()=>{
+    //模拟登录操作
+    fakeAuth.login();
+    //跳转到登录前的路径
+    this.props.history.push(this.props.location.state.from.pathname);
+  }
   render() {
-    return <div>Login</div>
+    let {from} = this.props.location.state||{from:'/'};
+    return (
+      <div>
+        <p>你需要登录后才能访问{from.pathname}路径</p>
+        <button onClick={this.login}>登录</button>
+      </div>
+    )
   }
 }
 class Protected extends Component {
@@ -41,10 +53,10 @@ class AuthExample extends Component {
 let fakeAuth = {
   isAuth: false,//默认为未登录状态
   login(){//登录
-
+    this.isAuth = true;
   },
-  signout(){//退出
-
+  signOut(){//退出
+    this.isAuth = false;
   }
 
 }
@@ -65,10 +77,11 @@ function AuthButton() {
 //路由的渲染方式有三种
 // 1. component
 // 2.使用render的方法,会把render的返回值渲染出来
-function PrivateRoute({component: Component, path}) {
-  return <Route path={path} render={
-    props => fakeAuth.isAuth ? <Component/> :
-      <Redirect to={{pathname: "/login", state: {from: props.location.pathname}}}/>
+function PrivateRoute({component: Component, ...rest}) {
+  // 当前路径是 /protected的话
+  return <Route {...rest} render={
+    ({location}) => fakeAuth.isAuth ? <Component/> :
+      <Redirect to={{pathname: "/login", state: {from:location}}}/>
   }/>
 }
 ReactDOM.render(<AuthExample/>, document.querySelector('#root'));
