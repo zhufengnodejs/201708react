@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Link,
   Redirect,
   withRouter
 } from 'react-router-dom';
+/**
+ * 1. 如何在跳转路径的时候传参数 state
+ * 2. 第二种渲染路由组件的方法 render
+ * 3. 如何在一个非直接由路由渲染出来的组件中使用history对象 外面的套一个withRouter
+ *
+ */
 function Public() {
   return <div>公开页面</div>
 }
@@ -55,14 +61,15 @@ class AuthExample extends Component {
 }
 //在这个对象里模拟登录操作,里面存放一个变量isAuth,用来表示当前用户是否登录
 let fakeAuth = {
-  isAuth: false,//默认为未登录状态
+  isAuth: !!localStorage.getItem('isAuth'),//默认为未登录状态
   login(){//登录
     this.isAuth = true;
+    localStorage.setItem('isAuth','true');
   },
   signOut(){//退出
     this.isAuth = false;
+    localStorage.clear();
   }
-
 }
 
 //如果说已经登录，则显示欢迎和退出按钮，否则显示你尚未登录
