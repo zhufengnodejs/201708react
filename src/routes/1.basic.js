@@ -33,7 +33,9 @@ function Users(){
     <ul>
       {
         users.map((item,index)=>(
-          <li key={index}><Link to={{pathname:'/detail',state:{user:item}}}>{item.name}</Link></li>
+          <li key={index}>
+            <Link to={{pathname:'/detail',state:{user:item}}}>{item.name}</Link>
+          </li>
         ))
       }
     </ul>
