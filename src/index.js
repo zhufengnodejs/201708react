@@ -1,1 +1,1 @@
-import './routes/1.basic'
+import './routes/2.auth'
