@@ -4,8 +4,7 @@
  * 处理器 reducer
  * 订阅 subscribe
  */
-//初始状态
-let initState = 0;
+
 //创建仓库
 let createStore = function(reducer){
     //仓库里有状态
@@ -25,10 +24,32 @@ let createStore = function(reducer){
    let subscribe = (listener)=>{
       listeners.push(listener);
    }
+   //立即派发一个空action,为了初始化仓库的状态
+   dispatch({});
    return {//这个就是我们的仓库
        getState,
        dispatch,
        subscribe
    }
 }
+const ADD = 'ADD';//加1
+const SUB = 'SUB';//减1
 
+//处理器 通过老的状态和动作对象，得到新的状态对象
+//{type:ADD} {type:SUB}
+//仓库的状态可以是任意类型
+//初始状态
+let initState = 0;
+//仓库需要初始化，在初始化的时候需要传递初始值
+let reducer = (state=initState,action)=>{
+  switch(action.type){
+      case ADD:
+          return state + 1;
+      case SUB:
+          return state - 1;
+      default:
+          return state;
+  }
+}
+let store = createStore(reducer);
+console.log(store.getState());
