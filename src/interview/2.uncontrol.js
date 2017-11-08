@@ -14,6 +14,10 @@ export default class Form extends Component{
       let password = this.password.value;
       console.log({username,password});
     }
+    /**
+     * ul li-1 li-2 li-3
+     * ul li-1 li-3 li-4
+     **/
     render(){
         //现在REF只能传入一个函数，就是当虚拟DOM转真实DOM并插入到页面之后执行，参数就是真实DOM
         return (
