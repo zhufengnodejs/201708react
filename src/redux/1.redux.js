@@ -13,23 +13,25 @@ let createStore = function(reducer){
    let listeners = [];
    //获取仓库中的状态
    let getState = ()=>state;
+    //订阅仓库中状态变化事件
+    let subscribe = (listener)=>{
+        listeners.push(listener);
+    }
    //让外界给仓库派发动作
     //action是一个普通的JS对象, 必须要有一个 type属性
    let dispatch = (action)=>{
       //仓库会把得到的老状态和动作传给reducer,得到新的状态
       state = reducer(state,action);
+      //通知所有的订阅函数执行
       listeners.forEach(l=>l());
    }
-   //订阅仓库中状态变化事件
-   let subscribe = (listener)=>{
-      listeners.push(listener);
-   }
+
    //立即派发一个空action,为了初始化仓库的状态
    dispatch({});
    return {//这个就是我们的仓库
-       getState,
-       dispatch,
-       subscribe
+       getState,//获取仓库状态
+       dispatch,//派发动作
+       subscribe//订阅仓库中的状态变化事件
    }
 }
 const ADD = 'ADD';//加1
@@ -52,4 +54,7 @@ let reducer = (state=initState,action)=>{
   }
 }
 let store = createStore(reducer);
+console.log(store.getState());
+store.dispatch({type:SUB});
+store.dispatch({type:SUB});
 console.log(store.getState());

@@ -1,4 +1,4 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './interview/7.pure';
+import './redux/2.counter';
 //ReactDOM.render(<Example/>,document.querySelector('#root'));
