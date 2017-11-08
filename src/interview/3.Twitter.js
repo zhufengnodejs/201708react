@@ -24,7 +24,7 @@ class Twitter extends Component{
 }
 ReactDOM.render(<Twitter username="zfpx">
     {
-        user=><h1>{user.username}{user.password}</h1>
+        user=><p>{user.username}{user.password}</p>
     }
 </Twitter>,document.querySelector('#root'));
 
