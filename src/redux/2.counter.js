@@ -37,10 +37,24 @@ class Counter extends Component{
             <div>
                 <p>{this.state.number}</p>
                 <input type="text" ref={input=>this.input = input}/>
-                <button onClick={()=>store.dispatch({type:ADD,payload:parseFloat(this.input.value)})}>+</button>
-                <button onClick={()=>store.dispatch({type:SUB,payload:parseFloat(this.input.value)})}>-</button>
+                <button onClick={()=>store.dispatch(add(this.input.value||0))}>+</button>
+                <button onClick={()=>store.dispatch(sub(this.input.value||0))}>-</button>
             </div>
         )
+    }
+}
+//actionCreator就是用来创建action的函数
+//每一个动作类型对应一个action-creator
+function add(payload){
+    return {
+        type:ADD,
+        payload
+    }
+}
+function sub(payload){
+    return {
+        type:SUB,
+        payload
     }
 }
 ReactDOM.render(<div>
