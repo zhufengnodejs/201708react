@@ -1,5 +1,30 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
+class SubCounter extends Component{
+    //组件将要接收到新的属性
+    //只用当父组建重新渲染的时候，重新render的时候，会传入新的属性
+    componentWillReceiveProps(){
+       console.log('SubCounter componentWillReceiveProps');
+    }
+    shouldComponentUpdate(newProps,newState){
+        if(newProps.number<15){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    componentWillUnmount(){
+        console.log('SubCounter componentWillUnmount');
+    }
+
+    render(){
+        return (
+            <div>
+                <p>{this.props.number}</p>
+            </div>
+        )
+    }
+}
 class Counter extends Component{
     //1.默认属性 getDefaultProps
     static defaultProps = {
@@ -43,6 +68,13 @@ class Counter extends Component{
             <div>
                 <p>{this.state.number}</p>
                 <button onClick={this.handleClick}>+</button>
+                <hr/>
+                {
+                    this.state.number<10?
+                        <SubCounter number={this.state.number}/>
+                        :null
+                }
+
             </div>
         )
     }
