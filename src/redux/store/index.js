@@ -11,7 +11,7 @@ import todos from './reducers/todos';
 function combineReducers(obj){
   //这个函数就是合并后的reducer,state就是完整的state
   //当reducer接到新的action之后，会通知给所有的reducer,那些子reduer都会根据自己的老state和action返回新的state
-  return function(state,action){
+  return function(state={},action){
     let result= {};
     for(let attr in obj){
       //取出每个reducer,然后执行，执行时传入本reducer老的state,和 action，并且把返回的结果覆盖相应的属性
@@ -33,4 +33,5 @@ let reducer = combineReducers({
 }
 */
 let store = createStore(reducer);
+store.getState();
 export default store;

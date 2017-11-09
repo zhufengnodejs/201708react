@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import store from './store/index.js';
-import * as types from './store/action-types';
+import store from './store';
+import actions from './store/action-creator'
 
 export default class Counter extends Component{
     constructor(){
@@ -23,23 +23,12 @@ export default class Counter extends Component{
             <div>
                 <p>{this.state.number}</p>
                 <input type="text" ref={input=>this.input = input}/>
-                <button onClick={()=>store.dispatch(add(parseFloat(this.input.value)||0))}>+</button>
-                <button onClick={()=>store.dispatch(sub(parseFloat(this.input.value)||0))}>-</button>
+                <button
+                    onClick={()=>actions.add(parseFloat(this.input.value)||0)}
+                >+</button>
+                <button onClick={()=>actions.sub(parseFloat(this.input.value)||0)}>-</button>
             </div>
         )
     }
 }
-//actionCreator就是用来创建action的函数
-//每一个动作类型对应一个action-creator
-function add(payload){
-    return {
-        type:types.ADD,
-        payload
-    }
-}
-function sub(payload){
-    return {
-        type:types.SUB,
-        payload
-    }
-}
+
