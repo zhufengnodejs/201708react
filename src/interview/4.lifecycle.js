@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 class SubCounter extends Component{
     //组件将要接收到新的属性
     //只用当父组建重新渲染的时候，重新render的时候，会传入新的属性
-    componentWillReceiveProps(){
+    componentWillReceiveProps(newProps){
        console.log('SubCounter componentWillReceiveProps');
     }
     shouldComponentUpdate(newProps,newState){
