@@ -6,7 +6,7 @@ class Counter extends Component{
       return (
           <div>
               <p>{this.props.number}</p>
-              <button>+</button>
+              <button onClick={this.props.add}>+</button>
           </div>
       )
   }
@@ -27,7 +27,7 @@ let mapDispatchToProps = dispatch => ({
     add:()=>dispatch({type:types.ADD}),
     sub:()=>dispatch({type:types.SUB})
 })
-export default connect(mapStateToProps)(Counter)
+export default connect(mapStateToProps,mapDispatchToProps)(Counter)
 
 
 
