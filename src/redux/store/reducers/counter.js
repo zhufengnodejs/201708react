@@ -1,11 +1,10 @@
-const ADD = 'ADD';
-const SUB = 'SUB';
+import * as types from '../action-types';
 let initState = {number:0};
 let reducer = (state=initState,action)=>{
     switch(action.type){
-        case ADD:
+        case types.ADD:
             return {number:state.number+action.payload};
-        case SUB:
+        case types.SUB:
             return {number:state.number-action.payload};
         default:
             return state;

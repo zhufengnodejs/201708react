@@ -1,19 +1,18 @@
 import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
-
+import store from './store/index.js';
+import * as types from './store/action-types';
 
 export default class Counter extends Component{
     constructor(){
         super();
         //在初始化的时候，把仓库中的状态拿过来存放到自己的内部状态中
-        this.state = {number:store.getState().number};
+        this.state = {number:store.getState().counter.number};
     }
     //在组件渲染完成后订阅仓库的状态变化事件
     componentDidMount(){
       //取消订阅
       this.unSubscribe = store.subscribe(()=>{
-         this.setState({number:store.getState().number});
+         this.setState({number:store.getState().counter.number});
       })
     }//在组件卸载的时候需要取消订阅
     componentWillUnmount(){
@@ -34,13 +33,13 @@ export default class Counter extends Component{
 //每一个动作类型对应一个action-creator
 function add(payload){
     return {
-        type:ADD,
+        type:types.ADD,
         payload
     }
 }
 function sub(payload){
     return {
-        type:SUB,
+        type:types.SUB,
         payload
     }
 }

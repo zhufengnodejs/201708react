@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import store from './store';
-
+import store from './store/index.js';
+import * as types from './store/action-types';
 export default class Todos extends Component {
     constructor() {
         super();
-        this.state = {todos: store.getState().todos};
+        this.state = {todos: store.getState().todos.list};
     }
     componentDidMount(){
         this.unSubscribe = store.subscribe(()=>{
-            this.setState({todos:store.getState().todos});
+            this.setState({todos:store.getState().todos.list});
         })
     }
     componentWillUnmount(){
@@ -18,13 +18,13 @@ export default class Todos extends Component {
         let keyCode = event.keyCode;
         if(keyCode == 13){
             let payload = event.target.value;
-            store.dispatch({type:ADD_TODO,payload});
+            store.dispatch({type:types.ADD_TODO,payload});
             event.target.value = '';
         }
     }
     delTodo = (index)=>{
         store.dispatch({
-            type:DEL_TODO,
+            type:types.DEL_TODO,
             index
         })
     }
