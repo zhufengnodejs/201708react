@@ -1,20 +1,7 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
-const ADD = 'ADD';
-const SUB = 'SUB';
-let initState = {number:0};
-let reducer = (state=initState,action)=>{
-    switch(action.type){
-        case ADD:
-            return {number:state.number+action.payload};
-        case SUB:
-            return {number:state.number-action.payload};
-        default:
-            return state;
-    }
-}
-let store = createStore(reducer);
+
 
 export default class Counter extends Component{
     constructor(){

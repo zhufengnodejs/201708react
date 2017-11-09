@@ -1,4 +1,3 @@
-import {createStore} from 'redux';
 const ADD_TODO = 'ADD_TODO';//增加一个TODO
 const DEL_TODO = 'DEL_TODO';//删除一个TODO
 //状态树，因为状态一般都用对象，而对象都是🌲型结构
@@ -15,5 +14,4 @@ let reducer = (state = initState, action) => {
             return state;
     }
 }
-let store = createStore(reducer);
-export default store;
+export default reducer;
