@@ -29,7 +29,9 @@ let mapStateToProps = state => state.counter
     sub:()=>dispatch({type:types.SUB})
 })*/
 //connect执行的结果是一个新组件
-export default connect(mapStateToProps,actions)(Counter)
+//connect方法会帮你生成一个容器组件
+let NewCounter = connect(mapStateToProps,actions)(Counter)
+export default NewCounter;
 
 
 
