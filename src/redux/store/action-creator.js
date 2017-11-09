@@ -19,7 +19,7 @@ let actionCreators =  {
         }
     }
 }
-export default bindActionCreators(actionCreators,dispatch);
+export default bindActionCreators(actionCreators,store.dispatch);
 
 
 /*
@@ -31,5 +31,11 @@ let actionCreators =  {
             type: types.ADD,
             payload
         });
+    },
+    sub(payload){
+       dispatch({
+         type:types.SUB,
+         payload
+        })
     }
 }*/

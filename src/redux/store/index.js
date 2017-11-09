@@ -33,5 +33,4 @@ let reducer = combineReducers({
 }
 */
 let store = createStore(reducer);
-store.getState();
 export default store;
